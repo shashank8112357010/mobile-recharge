@@ -59,7 +59,7 @@ export default function Home() {
         <div className="px-4 pt-4">
           <div className="bg-gradient-to-r from-primary to-blue-700 rounded-xl p-6 text-white relative overflow-hidden">
             <div className="relative z-10">
-              <h2 className="text-xl font-bold mb-2">Welcome to MobileHub!</h2>
+              <h2 className="text-xl font-bold mb-2">Welcome to Ganpati Traders!</h2>
               <p className="text-blue-100 text-sm mb-4">Buy, Sell & Recharge - All in one place</p>
               <Link href="/sell">
                 <Button variant="secondary" className="bg-white text-primary hover:bg-gray-100">

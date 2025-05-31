@@ -10,9 +10,9 @@ export default function Landing() {
           <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-6">
             <i className="fas fa-mobile-alt text-white text-2xl"></i>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-3">MobileHub</h1>
-          <p className="text-gray-600 text-lg">Buy, Sell & Recharge</p>
-          <p className="text-gray-500 mt-2">Your one-stop mobile marketplace</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-3">Ganpati Traders</h1>
+          <p className="text-gray-600 text-lg">A house of mobile</p>
+          <p className="text-gray-500 mt-2">Buy, Sell & Recharge</p>
         </div>
 
         {/* Features */}

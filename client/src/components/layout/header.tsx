@@ -26,7 +26,7 @@ export default function Header({ onSearch }: HeaderProps) {
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <i className="fas fa-mobile-alt text-white text-sm"></i>
               </div>
-              <span className="font-bold text-lg text-gray-900">MobileHub</span>
+              <span className="font-bold text-lg text-gray-900">Ganpati Traders</span>
             </div>
             <div className="flex items-center space-x-3">
               <Button
