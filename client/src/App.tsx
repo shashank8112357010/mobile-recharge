@@ -11,6 +11,7 @@ import Sell from "@/pages/sell";
 import Recharge from "@/pages/recharge";
 import Profile from "@/pages/profile";
 import Admin from "@/pages/admin";
+import MobileDetail from "@/pages/mobile-detail";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -28,6 +29,7 @@ function Router() {
           <Route path="/recharge" component={Recharge} />
           <Route path="/profile" component={Profile} />
           <Route path="/admin" component={Admin} />
+          <Route path="/mobile/:id" component={MobileDetail} />
         </>
       )}
       <Route component={NotFound} />

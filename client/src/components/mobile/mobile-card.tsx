@@ -123,7 +123,9 @@ export default function MobileCard({ mobile, showFavoriteButton = true, isFavori
                         <i className={`fa${favorited ? 's' : 'r'} fa-heart ${favorited ? 'text-red-500' : 'text-gray-400'}`}></i>
                       </Button>
                     )}
-                    <Button size="sm">View</Button>
+                    <Button size="sm" onClick={() => window.location.href = `/mobile/${mobile.id}`}>
+                      View
+                    </Button>
                   </div>
                 </div>
               </div>
