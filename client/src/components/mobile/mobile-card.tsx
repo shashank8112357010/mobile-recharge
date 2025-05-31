@@ -51,14 +51,28 @@ export default function MobileCard({ mobile, showFavoriteButton = true, isFavori
   };
 
   return (
-    <Card className="shadow-sm hover:shadow-md transition-shadow">
+    <Card className="shadow-sm hover:shadow-md transition-shadow relative">
+      {/* Offer Badge */}
+      {mobile.featured && mobile.offerText && (
+        <div className="absolute top-2 left-2 z-10 bg-red-500 text-white px-2 py-1 rounded-md text-xs font-medium">
+          {mobile.offerText}
+        </div>
+      )}
+      
+      {/* Discount Badge */}
+      {mobile.discountPercentage && mobile.discountPercentage > 0 && (
+        <div className="absolute top-2 right-2 z-10 bg-green-500 text-white px-2 py-1 rounded-md text-xs font-bold">
+          {mobile.discountPercentage}% OFF
+        </div>
+      )}
+      
       <CardContent className="p-4">
         <div className="flex space-x-4">
           {mobile.images && mobile.images.length > 0 ? (
             <img
               src={mobile.images[0]}
               alt={`${mobile.brand} ${mobile.model}`}
-              className="w-20 h-20 object-cover rounded-lg flex-shrink-0"
+              className="w-20 h-20 object-contain rounded-lg flex-shrink-0 bg-gray-50 p-1"
             />
           ) : (
             <div className="w-20 h-20 bg-gray-200 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -80,12 +94,24 @@ export default function MobileCard({ mobile, showFavoriteButton = true, isFavori
                   <Badge variant={mobile.isNew ? "default" : "secondary"}>
                     {mobile.isNew ? "New" : mobile.condition}
                   </Badge>
+                  {mobile.featured && (
+                    <Badge variant="destructive" className="text-xs">
+                      FEATURED
+                    </Badge>
+                  )}
                   <span className="text-xs text-gray-500">{mobile.location}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-lg font-bold text-gray-900">
-                    ₹{Number(mobile.price).toLocaleString()}
-                  </span>
+                  <div className="flex flex-col">
+                    <span className="text-lg font-bold text-gray-900">
+                      ₹{Number(mobile.price).toLocaleString()}
+                    </span>
+                    {mobile.originalPrice && Number(mobile.originalPrice) > Number(mobile.price) && (
+                      <span className="text-sm text-gray-500 line-through">
+                        ₹{Number(mobile.originalPrice).toLocaleString()}
+                      </span>
+                    )}
+                  </div>
                   <div className="flex items-center space-x-2">
                     {showFavoriteButton && (
                       <Button
