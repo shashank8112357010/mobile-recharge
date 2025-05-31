@@ -47,9 +47,13 @@ export const mobiles = pgTable("mobiles", {
   color: varchar("color"),
   condition: varchar("condition").notNull(), // excellent, good, fair, poor
   price: decimal("price", { precision: 10, scale: 2 }).notNull(),
+  originalPrice: decimal("original_price", { precision: 10, scale: 2 }),
+  discountPercentage: integer("discount_percentage"),
   description: text("description"),
   images: jsonb("images").default([]), // array of image URLs
   isNew: boolean("is_new").default(false),
+  featured: boolean("featured").default(false),
+  offerText: varchar("offer_text"),
   status: varchar("status").default("pending"), // pending, approved, rejected, sold
   location: varchar("location"),
   specifications: jsonb("specifications").default({}), // RAM, processor, etc.
