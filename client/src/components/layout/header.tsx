@@ -7,6 +7,7 @@ interface HeaderProps {
 }
 
 export default function Header({ onSearch }: HeaderProps) {
+  
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -26,7 +27,7 @@ export default function Header({ onSearch }: HeaderProps) {
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <i className="fas fa-mobile-alt text-white text-sm"></i>
               </div>
-              <span className="font-bold text-lg text-gray-900">Ganpati Traders</span>
+              <span className="cursor-pointer font-bold text-lg text-gray-900" onClick={()=>window.location.href = '/'}>Ganpati Traders</span>
             </div>
             <div className="flex items-center space-x-3">
               <Button

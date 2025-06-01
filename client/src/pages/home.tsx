@@ -15,40 +15,40 @@ export default function Home() {
   const { isAuthenticated, isLoading } = useAuth();
   const { data: featuredMobiles, error } = useMobiles({ status: 'approved', limit: 6 });
 
-  useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      toast({
-        title: "Unauthorized",
-        description: "You are logged out. Logging in again...",
-        variant: "destructive",
-      });
-      setTimeout(() => {
-        window.location.href = "/api/login";
-      }, 500);
-      return;
-    }
-  }, [isAuthenticated, isLoading, toast]);
+  // useEffect(() => {
+  //   if (!isLoading && !isAuthenticated) {
+  //     toast({
+  //       title: "Unauthorized",
+  //       description: "You are logged out. Logging in again...",
+  //       variant: "destructive",
+  //     });
+  //     setTimeout(() => {
+  //       window.location.href = "/api/login";
+  //     }, 500);
+  //     return;
+  //   }
+  // }, [isAuthenticated, isLoading, toast]);
 
-  useEffect(() => {
-    if (error && isUnauthorizedError(error)) {
-      toast({
-        title: "Unauthorized",
-        description: "You are logged out. Logging in again...",
-        variant: "destructive",
-      });
-      setTimeout(() => {
-        window.location.href = "/api/login";
-      }, 500);
-    }
-  }, [error, toast]);
+  // useEffect(() => {
+  //   if (error && isUnauthorizedError(error)) {
+  //     toast({
+  //       title: "Unauthorized",
+  //       description: "You are logged out. Logging in again...",
+  //       variant: "destructive",
+  //     });
+  //     setTimeout(() => {
+  //       window.location.href = "/api/login";
+  //     }, 500);
+  //   }
+  // }, [error, toast]);
 
-  if (isLoading || !isAuthenticated) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
+  // if (isLoading || !isAuthenticated) {
+  //   return (
+  //     <div className="min-h-screen flex items-center justify-center">
+  //       <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -136,7 +136,7 @@ export default function Home() {
               {featuredMobiles.slice(0, 3).map((mobile) => (
                 <Card key={mobile.id} className="flex-none w-72 shadow-sm">
                   <CardContent className="p-4">
-                    {mobile.images && mobile.images.length > 0 ? (
+                    {mobile.images && mobile?.images?.length > 0 ? (
                       <img 
                         src={mobile.images[0]} 
                         alt={`${mobile.brand} ${mobile.model}`}

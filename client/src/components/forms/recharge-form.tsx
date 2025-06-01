@@ -40,7 +40,7 @@ const RECHARGE_PLANS = [
     amount: "399",
     validity: "28 days", 
     data: "2.5GB/day",
-    benefits: "Unlimited calls + Disney+ Hotstar",
+    benefits: "Unlimited + Hotstar",
     badge: "Best Value",
     badgeColor: "bg-blue-100 text-blue-600"
   },
@@ -48,7 +48,7 @@ const RECHARGE_PLANS = [
     amount: "599",
     validity: "56 days",
     data: "2GB/day", 
-    benefits: "Unlimited calls + Netflix",
+    benefits: "Unlimited calls ",
     badge: "Long Validity",
     badgeColor: "bg-purple-100 text-purple-600"
   }
@@ -255,24 +255,24 @@ export default function RechargeForm() {
 
           {/* Recharge Plans */}
           <Card>
-            <CardContent className="p-6">
+            <CardContent className="p-6 font-sm">
               <h4 className="font-semibold text-gray-900 mb-4">Popular Plans</h4>
-              <div className="space-y-3">
+              <div className="space-y-3 text-sm">
                 {RECHARGE_PLANS.map((plan) => (
                   <Button
                     key={plan.amount}
                     type="button"
                     variant={selectedPlan === plan.amount ? "default" : "outline"}
-                    className="w-full p-4 h-auto justify-between"
+                    className="w-full p-4 h-auto justify-between text-sm"
                     onClick={() => handlePlanSelect(plan.amount)}
                   >
                     <div className="text-left">
                       <div className="font-semibold">₹{plan.amount}</div>
-                      <div className="text-sm opacity-70">
+                      <div className="text-xs opacity-70">
                         {plan.data} • {plan.validity} • {plan.benefits}
                       </div>
                     </div>
-                    <div className="text-right">
+                    <div className="text-right text-xs">
                       <Badge className={plan.badgeColor}>
                         {plan.badge}
                       </Badge>
@@ -333,7 +333,7 @@ export default function RechargeForm() {
                         <div className="font-medium">{method.name}</div>
                         <div className="text-sm opacity-70">{method.description}</div>
                       </div>
-                      <Badge className="text-green-600">{method.badge}</Badge>
+                      <Badge className="text-white-600">{method.badge}</Badge>
                     </div>
                   </Button>
                 ))}

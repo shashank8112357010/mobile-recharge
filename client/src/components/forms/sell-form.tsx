@@ -26,9 +26,9 @@ const BRANDS = ["Apple", "Samsung", "OnePlus", "Xiaomi", "Google", "Realme", "Vi
 const STORAGE_OPTIONS = ["64GB", "128GB", "256GB", "512GB", "1TB"];
 const CONDITIONS = [
   { value: "excellent", label: "Excellent", description: "Like new, no scratches" },
-  { value: "good", label: "Good", description: "Minor wear, fully functional" },
-  { value: "fair", label: "Fair", description: "Noticeable wear, works well" },
-  { value: "poor", label: "Poor", description: "Heavy wear, still functional" },
+  { value: "good", label: "Good", description: "Minor wear" },
+  { value: "fair", label: "Fair", description: "Noticeable wear, works" },
+  { value: "poor", label: "Poor", description: "Heavy wear, still working" },
 ];
 
 export default function SellForm() {
@@ -241,7 +241,7 @@ export default function SellForm() {
                           >
                             <div>
                               <div className="font-medium">{condition.label}</div>
-                              <div className="text-sm opacity-70">{condition.description}</div>
+                              <div className="text-xs opacity-70">{condition.description}</div>
                             </div>
                           </Button>
                         ))}

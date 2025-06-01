@@ -1,7 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { setupAuth, isAuthenticated } from "./replitAuth";
 import { 
   insertMobileSchema, 
   insertRechargeTransactionSchema, 
@@ -12,19 +11,10 @@ import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Auth middleware
-  await setupAuth(app);
+
 
   // Auth routes
-  app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
-    try {
-      const userId = req.user.claims.sub;
-      const user = await storage.getUser(userId);
-      res.json(user);
-    } catch (error) {
-      console.error("Error fetching user:", error);
-      res.status(500).json({ message: "Failed to fetch user" });
-    }
-  });
+  
 
   // Mobile routes
   app.get('/api/mobiles', async (req, res) => {
@@ -60,7 +50,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post('/api/mobiles', isAuthenticated, async (req: any, res) => {
+  app.post('/api/mobiles', async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
       const mobileData = insertMobileSchema.parse({
@@ -79,7 +69,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.put('/api/mobiles/:id', isAuthenticated, async (req: any, res) => {
+  app.put('/api/mobiles/:id', async (req: any, res) => {
     try {
       const id = parseInt(req.params.id);
       const userId = req.user.claims.sub;
@@ -103,7 +93,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.delete('/api/mobiles/:id', isAuthenticated, async (req: any, res) => {
+  app.delete('/api/mobiles/:id', async (req: any, res) => {
     try {
       const id = parseInt(req.params.id);
       const userId = req.user.claims.sub;
@@ -132,7 +122,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // User's mobiles
-  app.get('/api/user/mobiles', isAuthenticated, async (req: any, res) => {
+  app.get('/api/user/mobiles', async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
       const mobiles = await storage.getMobiles({ sellerId: userId });
@@ -144,7 +134,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Recharge routes
-  app.post('/api/recharge', isAuthenticated, async (req: any, res) => {
+  app.post('/api/recharge', async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
       const transactionData = insertRechargeTransactionSchema.parse({
@@ -171,7 +161,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get('/api/recharge/history', isAuthenticated, async (req: any, res) => {
+  app.get('/api/recharge/history', async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
       const transactions = await storage.getRechargeTransactions(userId);
@@ -183,7 +173,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Favorites routes
-  app.post('/api/favorites', isAuthenticated, async (req: any, res) => {
+  app.post('/api/favorites', async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
       const favoriteData = insertFavoriteSchema.parse({
@@ -202,7 +192,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.delete('/api/favorites/:mobileId', isAuthenticated, async (req: any, res) => {
+  app.delete('/api/favorites/:mobileId', async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
       const mobileId = parseInt(req.params.mobileId);
@@ -219,7 +209,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get('/api/favorites', isAuthenticated, async (req: any, res) => {
+  app.get('/api/favorites', async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
       const favorites = await storage.getUserFavorites(userId);
@@ -231,7 +221,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Order routes
-  app.post('/api/orders', isAuthenticated, async (req: any, res) => {
+  app.post('/api/orders', async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
       const orderData = insertOrderSchema.parse({
@@ -250,7 +240,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get('/api/orders', isAuthenticated, async (req: any, res) => {
+  app.get('/api/orders', async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
       const type = req.query.type as 'buyer' | 'seller' | undefined;
@@ -263,7 +253,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Admin routes
-  app.get('/api/admin/pending-mobiles', isAuthenticated, async (req: any, res) => {
+  app.get('/api/admin/pending-mobiles', async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
       const user = await storage.getUser(userId);
@@ -280,7 +270,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get('/api/admin/stats', isAuthenticated, async (req: any, res) => {
+  app.get('/api/admin/stats', async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
       const user = await storage.getUser(userId);
@@ -306,7 +296,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.put('/api/admin/mobiles/:id/approve', isAuthenticated, async (req: any, res) => {
+  app.put('/api/admin/mobiles/:id/approve', async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
       const user = await storage.getUser(userId);
@@ -324,7 +314,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.put('/api/admin/mobiles/:id/reject', isAuthenticated, async (req: any, res) => {
+  app.put('/api/admin/mobiles/:id/reject', async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
       const user = await storage.getUser(userId);

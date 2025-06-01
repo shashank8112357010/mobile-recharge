@@ -15,14 +15,10 @@ import MobileDetail from "@/pages/mobile-detail";
 import NotFound from "@/pages/not-found";
 
 function Router() {
-  const { isAuthenticated, isLoading } = useAuth();
 
   return (
     <Switch>
-      {isLoading || !isAuthenticated ? (
-        <Route path="/" component={Landing} />
-      ) : (
-        <>
+    <>
           <Route path="/" component={Home} />
           <Route path="/browse" component={Browse} />
           <Route path="/sell" component={Sell} />
@@ -31,7 +27,6 @@ function Router() {
           <Route path="/admin" component={Admin} />
           <Route path="/mobile/:id" component={MobileDetail} />
         </>
-      )}
       <Route component={NotFound} />
     </Switch>
   );
